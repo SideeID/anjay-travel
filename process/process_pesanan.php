@@ -10,10 +10,17 @@ if (isset($_POST['pesanan_submit'])) {
     $jenis_paket = $_POST['package'];
     $jumlah_penumpang = $_POST['passengers'];
     $lama_menginap = $_POST['stay_length'];
-    // $opsi_tambahan = $_POST['option'];
     $total = $_POST['total_cost'];
 
-    $query = "INSERT INTO pesanan (nama, nomor, tanggal, jenis_paket, jumlah_penumpang, lama_penginap, total) VALUES ('$nama', '$nomor', '$tanggal', '$jenis_paket', '$jumlah_penumpang', '$lama_menginap', '$total')";
+    // Menginisialisasi nilai default untuk opsi tambahan yang bertipe data boolean
+$penginapan = in_array('Penginapan', $_POST['options']) ? 1 : 0;
+$transportasi = in_array('Transportasi', $_POST['options']) ? 1 : 0;
+$konsumsi = in_array('Konsumsi', $_POST['options']) ? 1 : 0;
+
+
+    $query = "INSERT INTO pesanan (nama, nomor_telepon, tanggal, jenis_paket, jumlah_penumpang, lama_menginap, penginapan, transportasi, konsumsi, total_biaya) 
+              VALUES ('$nama', '$nomor', '$tanggal', '$jenis_paket', '$jumlah_penumpang', '$lama_menginap', '$penginapan', '$transportasi', '$konsumsi', '$total')";
+              
     $result = mysqli_query($koneksi, $query);
 
     if ($result) {

@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once "../process/koneksi.php";
 if (!isset($_SESSION["login"])) {
     header("Location: login.php");
     exit();
@@ -13,6 +14,8 @@ if (isset($_SESSION["login"])) {
         $name = $_SESSION["name"];
     }
 }
+$query = "SELECT * FROM pesanan";
+$result = mysqli_query($koneksi, $query);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -82,17 +85,15 @@ if (isset($_SESSION["login"])) {
             <div class="container">
                 <ol>
                     <li><a href="../index.php">Home</a></li>
-                    <li>Pengeditan Data</li>
+                    <li>Admin</li>
                 </ol>
-                <h2>Pengeditan Data</h2>
+                <h2>Data Master</h2>
             </div>
         </section>
         <!-- End Breadcrumbs -->
 
         <section class="inner-page">
           <div class="container">
-            <?php
-            echo'
               <table class="table table-striped table-hover">
                 <thead>
                   <tr>
@@ -109,12 +110,33 @@ if (isset($_SESSION["login"])) {
                     <th scope="col">Aksi</th>
                   </tr>
                 </thead>
-                <tbody>
-
-                </tbody>
+              <?php
+              while ($data = mysqli_fetch_array($result)) {
+                echo "<tr>";
+                echo "<td>" . $data['nama'] . "</td>";
+                echo "<td>" . $data['nomor_telepon'] . "</td>";
+                echo "<td>" . $data['tanggal'] . "</td>";
+                echo "<td>" . $data['jenis_paket'] . "</td>";
+                echo "<td>" . $data['jumlah_penumpang'] . "</td>";
+                echo "<td>" . $data['lama_menginap'] . "</td>";
+                echo "<td>" . ($data['penginapan'] == 1 ? 'tambah' : 'tidak') . "</td>";
+                echo "<td>" . ($data['konsumsi'] == 1 ? 'tambah' : 'tidak') . "</td>";
+                echo "<td>" . ($data['transportasi'] == 1 ? 'tambah' : 'tidak') . "</td>";
+                echo "<td>" . $data['total_biaya'] . "</td>";
+                echo "<td>
+                <div class='d-flex gap-3'>
+                <a href='edit.php?id=". $data['id'] ."'>
+                <i class='bi bi-pencil' data-bs-toggle='modal' data-bs-target='#exampleModal'></i>
+                </a>
+                <a href='../process/process_hapus_pesanan.php?id=" . $data['id'] . "' onclick='return confirm(\"Apakah Anda yakin ingin menghapus data?\")'>
+                <i class='bi bi-trash'></i>
+                </a>
+                </div>
+                </td>";
+                echo "</tr>";
+              }
+              ?>
               </table>
-              ';
-            ?>
           </div>
         </section>
     </main>
@@ -138,6 +160,63 @@ if (isset($_SESSION["login"])) {
     </footer>
     <!-- End Footer -->
 
+    <!-- modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit Data Pesanan</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <!-- <form action="../process/process_edit_pesanan.php" method="post">
+              <div class="mb-3">
+                <label for="name" class="form-label">Nama</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+              </div>
+              <div class="mb-3">
+                <label for="phone" class="form-label">Nomor</label>
+                <input type="number" class="form-control" id="phone" name="phone" required>
+              </div>
+              <div class="mb-3">
+                <label for="date" class="form-label">Tanggal</label>
+                <input type="date" class="form-control" id="date" name="date" required>
+              </div>
+              <div class="mb-3">
+                <label for="package" class="form-label">Jenis Paket</label>
+                <input type="text" class="form-control" id="package" name="package" required>
+              </div>
+              <div class="mb-3">
+                <label for="passengers" class="form-label">Jumlah Penumpang</label>
+                <input type="number" class="form-control" id="passengers" name="passengers" required>
+              </div>
+              <div class="mb-3">
+                <label for="stay_length" class="form-label">Lama Menginap</label>
+                <input type="number" class="form-control" id="stay_length" name="stay_length" required>
+              </div>
+              <div class="mb-3">
+                <label for="accommodation" class="form-label">Penginapan</label>
+                <input type="text" class="form-control" id="accommodation" name="accommodation" required>
+              </div>
+              <div class="mb-3">
+                <label for="consumption" class="form-label">Konsumsi</label>
+                <input type="text" class="form-control" id="consumption" name="consumption" required>
+              </div>
+              <div class="mb-3">
+                <label for="transportation" class="form-label">Transportasi</label>
+                <input type="text" class="form-control" id="transportation" name="transportation" required>
+              </div>
+              <div class="mb-3">
+                <label for="total_cost" class="form-label">Total</label>
+                <input type="number" class="form-control" id="total_cost" name="total_cost" required>
+              </div>
+              <button type="submit" class="btn btn-primary" name="edit_pesanan">Edit</button>
+            </form> -->
+          </div>
+        </div>
+      </div>
+    </div>
+      
     <div id="preloader"></div>
     <a
       href="#"
