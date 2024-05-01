@@ -3,9 +3,18 @@ document.addEventListener('DOMContentLoaded', function () {
     var passengersInput = document.getElementById('passengers');
     var passengers = parseInt(passengersInput.value) || 0;
 
+    // if (passengers < 1) {
+    //   passengers = 1;
+    //   passengersInput.value = passengers;
+    // }
 
     var stayLength =
       parseInt(document.getElementById('stay_length').value) || 0;
+
+    // if (stayLength < 1) {
+    //   stayLength = 1;
+    //   document.getElementById('stay_length').value = stayLength;
+    // }
 
     var hargaPaket = {
       'Paket A': 500000,
@@ -22,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // hitung total paket
     var selectedPackage = document.getElementById('package').value;
     var totalPackage = hargaPaket[selectedPackage] * passengers;
-    document.getElementById('total_paket').value = parseInt(totalPackage)
+    document.getElementById('total_paket').value = parseInt(totalPackage);
 
     // hitung total layanan
     var totalServices = 0;
@@ -34,11 +43,11 @@ document.addEventListener('DOMContentLoaded', function () {
       var serviceCost = hargaServis[service] * stayLength * passengers;
       totalServices += serviceCost;
     });
-    document.getElementById('total_layanan').value = parseInt(totalServices)
+    document.getElementById('total_layanan').value = parseInt(totalServices);
 
     // hitung toal biaya
     var totalCost = totalPackage + totalServices;
-    document.getElementById('total_cost').value = parseInt(totalCost)
+    document.getElementById('total_cost').value = parseInt(totalCost);
   }
 
   document.getElementById('passengers').addEventListener('input', updateCosts);

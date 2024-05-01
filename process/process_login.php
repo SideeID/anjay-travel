@@ -19,7 +19,7 @@ if (isset($_POST['login_submit'])) {
                 $_SESSION["login"] = true;
                 $_SESSION["email"] = $email;
                 $_SESSION["name"] = $row['name'];
-                $_SESSION["id_user"] = $row['id_user'];
+                $_SESSION["id_user"] = $row['id'];
 
                 if ($role == 1) {
                     $_SESSION["role"] = "admin";

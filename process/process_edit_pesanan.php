@@ -2,7 +2,6 @@
 session_start();
 require_once "koneksi.php";
 
-// edit data pesanan
 if (isset($_POST['edit_pesanan'])) {
     $id = $_POST['id'];
     $nama = $_POST['name'];

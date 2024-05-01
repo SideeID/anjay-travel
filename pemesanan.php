@@ -5,6 +5,12 @@ if (isset($_SESSION["login"])) {
     if (isset($_SESSION["name"])) {
         $name = $_SESSION["name"];
     }
+
+    if (isset($_SESSION["id_user"])) {
+        if (isset($_SESSION["id_user"])) {
+            $id_user = $_SESSION["id_user"];
+        }
+    };
 }
 ?>
 <!DOCTYPE html>
@@ -39,7 +45,7 @@ if (isset($_SESSION["login"])) {
             <nav id="navbar" class="navbar">
                 <ul>
                     <li><a class="nav-link scrollto" href="index.php">Home</a></li>
-                    <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+                    <li><a class="nav-link scrollto" href="#tentang">Tentang</a></li>
                     <?php
                     if (isset($_SESSION["login"])) {
                         echo '<li class="dropdown"><a href="#"><span>'. $name .'</span> <i class="bi bi-chevron-down"></i></a>
@@ -83,6 +89,7 @@ if (isset($_SESSION["login"])) {
                                             <label for="name" class="form-label">Nama</label>
                                             <input type="text" class="form-control" id="name" name="name" value="'. $name .'" readonly>
                                         </div>';
+                                        echo '<input type="text" class="form-control" id="id_user" name="id_user" value="'. $id_user .'" hidden>';
                                     } else {
                                         echo '<div class="mb-3">
                                             <label for="name" class="form-label">Nama</label>
@@ -90,6 +97,7 @@ if (isset($_SESSION["login"])) {
                                         </div>';
                                     }
                                     ?>
+
                                     <div class="mb-3">
                                         <label for="phone" class="form-label">Nomor Telepon</label>
                                         <input type="number" class="form-control" id="phone" name="phone" required>

@@ -95,7 +95,7 @@ $result = mysqli_query($koneksi, $query);
         <section class="inner-page">
           <div class="container">
               <table class="table table-striped table-hover">
-                <thead>
+                <thead class="">
                   <tr>
                     <th scope="col">Nama</th>
                     <th scope="col">Nomor</th>
@@ -117,8 +117,8 @@ $result = mysqli_query($koneksi, $query);
                 echo "<td>" . $data['nomor_telepon'] . "</td>";
                 echo "<td>" . $data['tanggal'] . "</td>";
                 echo "<td>" . $data['jenis_paket'] . "</td>";
-                echo "<td>" . $data['jumlah_penumpang'] . "</td>";
-                echo "<td>" . $data['lama_menginap'] . "</td>";
+                echo "<td>" . $data['jumlah_penumpang'] . " Orang</td>";
+                echo "<td>" . $data['lama_menginap'] .  " Hari</td>";
                 echo "<td>" . ($data['penginapan'] == 1 ? 'tambah' : 'tidak') . "</td>";
                 echo "<td>" . ($data['konsumsi'] == 1 ? 'tambah' : 'tidak') . "</td>";
                 echo "<td>" . ($data['transportasi'] == 1 ? 'tambah' : 'tidak') . "</td>";

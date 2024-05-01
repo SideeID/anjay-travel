@@ -38,7 +38,6 @@ if (isset($_SESSION["login"])) {
       rel="stylesheet"
     />
     <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
-
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet" />
   </head>
@@ -50,7 +49,8 @@ if (isset($_SESSION["login"])) {
         <nav id="navbar" class="navbar">
           <ul>
             <li><a class="nav-link active" href="#hero">Home</a></li>
-            <li><a class="nav-link" href="#contact">Contact</a></li>
+            <li><a class="nav-link" href="tentang.php">Tentang</a></li>
+            <li><a class="nav-link" href="riwayat_pembelian.php">Tiket</a></li>
             <?php
             if (isset($_SESSION["login"])) {
               echo '<li class="dropdown"><a href="#"><span>'. $name .'</span> <i class="bi bi-chevron-down"></i></a>
