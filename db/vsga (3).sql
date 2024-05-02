@@ -12,7 +12,7 @@ START TRANSACTION;
 SET time_zone = "+00:00";
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET T=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
@@ -29,7 +29,6 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `pesanan` (
   `id` int NOT NULL,
-  `id_user` int DEFAULT NULL,
   `nama` varchar(100) DEFAULT NULL,
   `gender` varchar(10) NOT NULL,
   `nomor_identitas` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -51,7 +50,7 @@ INSERT INTO `pesanan` (`id`, `id_user`, `nama`, `gender`, `nomor_identitas`, `ta
 (62, 1, 'Dimas fajar edit', 'Laki-laki', '3419974585858883', '2024-05-09', 'Delux', 1, 5, 1, 1, 10, 1935000.00),
 (63, 6, 'Doni Salmanan', 'Laki-laki', '7866250000372080', '2024-05-13', 'Family', 4, 2, 0, 1, 0, 4640000.00),
 (64, 1, 'Sofia', 'Perempuan', '3510082737374449', '2024-05-02', 'Standar', 1, 1, 0, 0, 0, 500000.00),
-(65, 1, 'seftie', 'Perempuan', '8977615353655533', '2024-05-16', 'Family', 2, 7, 0, 1, 10, 2808000.00),
+ 'Family', 2, 7, 0, 1, 10, 2808000.00),
 (66, 1, 'Aldo ', 'Laki-laki', '3510083775758883', '2024-05-06', 'Delux', 1, 4, 1, 1, 10, 1683000.00),
 (67, 7, 'seftie', 'Laki-laki', '1212222222222222', '2024-05-02', 'Family', 1, 4, 0, 1, 10, 1188000.00),
 (68, 7, 'seftie 2', 'Laki-laki', '1111111111111111', '2024-05-22', 'Family', 2, 1, 0, 1, 0, 2160000.00),
@@ -60,7 +59,7 @@ INSERT INTO `pesanan` (`id`, `id_user`, `nama`, `gender`, `nomor_identitas`, `ta
 (71, 8, 'dimass', 'Laki-laki', '4545454545454545', '2024-05-02', 'Delux', 1, 5, 1, 0, 10, 1575000.00),
 (72, 5, 'user', 'Laki-laki', '1111111111111111', '2024-05-02', 'Standar', 1, 4, 0, 1, 0, 77000000.00),
 (73, 5, 'user test', 'Laki-laki', '2222222222222222', '2024-05-02', 'Standar', 1, 1, 0, 0, 0, 50000000.00),
-(74, 5, 'user test 2', 'Laki-laki', '3333333333333333', '2024-05-02', 'Standar', 1, 1, 0, 0, 0, 500000.00),
+(74, 5, 'user test 2', 'Laki-laki', '0000.00),
 (75, 1, 'Mas Admin', 'Laki-laki', '1231231231231231', '2024-05-02', 'Standar', 1, 4, 1, 0, 10, 1250000.00);
 
 -- --------------------------------------------------------
@@ -74,8 +73,12 @@ CREATE TABLE `users` (
   `level` enum('1','2') NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
+<<<<<<< HEAD
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+>>>>>>> 975c389b56f1010a1767de0deb98fad2602cd225
 
 --
 -- Dumping data for table `users`
