@@ -53,7 +53,7 @@ if (isset($_SESSION["login"])) {
             <li><a class="nav-link" href="riwayat_pembelian.php">Tiket</a></li>
             <?php
             if (isset($_SESSION["login"])) {
-              echo '<li class="dropdown"><a href="#"><span>'. $name .'</span> <i class="bi bi-chevron-down"></i></a>
+              echo '<li class="nav-item dropdown"><a href="#"><span>'. $name .'</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                       <li><a href="./process/process_logout.php">Logout</a></li>
                     </ul>
@@ -95,19 +95,36 @@ if (isset($_SESSION["login"])) {
                       Murah
                     </li>
                     <li>
-                      <i class="ri-check-double-line"></i> Diskon Perjalanan Setiap
-                      Saat
+                      <i class="ri-check-double-line"></i> Pelayanan Terbaik
                     </li>
                     <li>
-                      <i class="ri-check-double-line"></i> Tersedia Semua Destinasi
-                      Pilihan
+                      <i class="ri-check-double-line"></i> Jaminan Keamanan
                     </li>
                   </ul>
                 </div>
                 <div class="col-lg-6 pt-4 pt-lg-0">
                   <p>
+                    <i class="bi bi-geo-alt"></i>
                     <?php 
                     $file = fopen("./assets/text/konten2.txt", "r");
+                    while(!feof($file)) {
+                      echo fgets($file);
+                    };
+                    ?>
+                  </p>
+                  <p>
+                    <i class="bi bi-envelope"></i>
+                    <?php 
+                    $file = fopen("./assets/text/email.txt", "r");
+                    while(!feof($file)) {
+                      echo fgets($file);
+                    };
+                    ?>
+                  </p>
+                  <p>
+                    <i class="bi bi-phone"></i>
+                    <?php 
+                    $file = fopen("./assets/text/phone.txt", "r");
                     while(!feof($file)) {
                       echo fgets($file);
                     };

@@ -12,14 +12,13 @@ if (isset($_SESSION["login"])) {
 // riwayat pembelian user
 if(isset($_SESSION['login'])){
     $id_user = $_SESSION['id_user'];
-    $query = "SELECT * FROM pesanan WHERE id_user = '$id_user'";
-    $result = mysqli_query($koneksi, $query);
-    if($result){
-        $pesanan = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    }else{
-        echo "Terjadi kesalahan saat mengambil data: " . mysqli_error($koneksi);
+    $query = "SELECT * FROM pesanan WHERE id_user = $id_user";
+    if (isset($_GET['search'])) {
+        $search = $_GET['search'];
+        $query .= " AND nama LIKE '%$search%'";
     }
-    mysqli_close($koneksi);
+    $result = mysqli_query($koneksi, $query);
+    $pesanan = mysqli_fetch_all($result, MYSQLI_ASSOC);
 } else {
     header("Location: login.php");
 }
@@ -54,9 +53,19 @@ if(isset($_SESSION['login'])){
       href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
       rel="stylesheet"
     />
-    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
     <!-- Template Main CSS File -->
     <link href="./assets/css/style.css" rel="stylesheet" />
+    <style>
+      .hfull {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .table {
+        border: dashed 1px #000;
+      }
+    </style>
   </head>
   <body>
     <!-- ======= Header ======= -->
@@ -86,45 +95,57 @@ if(isset($_SESSION['login'])){
     </header>
     <!-- End Header -->
 
-    <div class="container">
-      <div class="h-100">
-            <h1>Riwayat Pembelian</h1>
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <!-- <th>No</th> -->
-                    <th>Nama</th>
-                    <th>Nomor Telepon</th>
-                    <th>Tanggal</th>
-                    <th>Jenis Paket</th>
-                    <th>Jumlah Penumpang</th>
-                    <th>Lama Menginap</th>
-                    <th>Penginapan</th>
-                    <th>Konsumsi</th>
-                    <th>Transportasi</th>
-                    <th>Total Biaya</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                // $no = 1;
-                foreach ($pesanan as $p) {
-                    echo "<tr>";
-                    // echo "<td>" . $no++ . "</td>";
-                    echo "<td>" . $p['nama'] . "</td>";
-                    echo "<td>" . $p['nomor_telepon'] . "</td>";
-                    echo "<td>" . $p['tanggal'] . "</td>";
-                    echo "<td>" . $p['jenis_paket'] . "</td>";
-                    echo "<td>" . $p['jumlah_penumpang'] . "</td>";
-                    echo "<td>" . $p['lama_menginap'] . "</td>";
-                    echo "<td>" . $p['penginapan'] . "</td>";
-                    echo "<td>" . $p['konsumsi'] . "</td>";
-                    echo "<td>" . $p['transportasi'] . "</td>";
-                    echo "<td>" . $p['total_biaya'] . "</td>";
-                    echo "</tr>";
-                }
-                ?>
-            </tbody>
+    <div class="container hfull">
+      <div class="h-100" data-aos="fade-up">
+        <form action="" method="GET" class="mb-3">
+            <div class="input-group mt-3">
+                <input type="text" class="form-control" placeholder="Cari pesanan..." name="search" />
+                <button class="btn btn-primary" type="submit">Cari</button>
+            </div>
+          </form>
+        <table class="table table-striped table-hover caption-top">
+          <caption>Riwayat pesanan tiket</caption>
+          <thead>
+            <tr>
+              <!-- <th>No</th> -->
+              <th>Nama</th>
+              <th>Nomor Identitas</th>
+              <th>Gender</th>
+              <th>Tanggal</th>
+              <th>Jenis Kamar</th>
+              <th>Jumlah Orang</th>
+              <th>Lama Menginap</th>
+              <th>Konsumsi</th>
+              <th>Transportasi</th>
+              <th>Diskon</th>
+              <th>Total Biaya</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+            // $no = 1;
+            if (!empty($pesanan)) {
+              foreach ($pesanan as $p) {
+                echo "<tr>";
+                // echo "<td>" . $no++ . "</td>";
+                echo "<td>" . $p['nama'] . "</td>";
+                echo "<td>" . $p['nomor_identitas'] . "</td>";
+                echo "<td>" . $p['gender'] . "</td>";
+                echo "<td>" . $p['tanggal'] . "</td>";
+                echo "<td>" . $p['jenis_paket'] . "</td>";
+                echo "<td>" . $p['jumlah_penginap'] . " Orang</td>";
+                echo "<td>" . $p['lama_menginap'] . " Hari</td>";
+                echo "<td style='text-align: center;'>" . ($p['konsumsi'] == 1 ? '<i class="bi bi-check-circle"></i>' : '<i class="bi bi-x-circle"></i>') . "</td>";
+                echo "<td style='text-align: center;'>" . ($p['transportasi'] == 1 ? '<i class="bi bi-check-circle"></i>' : '<i class="bi bi-x-circle"></i>') . "</td>";
+                echo "<td>" . $p['diskon'] . "%</td>";
+                echo "<td>" . number_format($p['total_biaya'], 0, ',', '.') . "</td>";
+                echo "</tr>";
+              }
+            } else {
+              echo "<tr><td colspan='10'>Tidak ada data riwayat pembelian.</td></tr>";
+            }
+            ?>
+          </tbody>
         </table>
       </div>
     </div>
@@ -156,7 +177,6 @@ if(isset($_SESSION['login'])){
     <!-- Vendor JS Files -->
     <script src="assets/vendor/aos/aos.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
 
     <!-- Template Main JS File -->

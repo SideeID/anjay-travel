@@ -13,9 +13,9 @@ if (isset($_SESSION["login"])) {
     if (isset($_SESSION["name"])) {
         $name = $_SESSION["name"];
     }
-}
-$query = "SELECT * FROM pesanan";
+$query = "SELECT * FROM pesanan ORDER BY tanggal DESC";
 $result = mysqli_query($koneksi, $query);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,6 +51,14 @@ $result = mysqli_query($koneksi, $query);
 
     <!-- Template Main CSS File -->
     <link href="../assets/css/style.css" rel="stylesheet" />
+    <style>
+      .hfull {
+        height: 100%;
+      }
+      .table {
+        border: dashed 1px #000;
+      }
+    </style>
   </head>
   <body>
     <!-- ======= Header ======= -->
@@ -60,12 +68,12 @@ $result = mysqli_query($koneksi, $query);
         <nav id="navbar" class="navbar">
           <ul>
             <li><a class="nav-link" href="../index.php">Home</a></li>
-            <li><a class="nav-link" href="index.php">admin</a></li>
+            <li><a class="nav-link active" href="index.php">admin</a></li>
             <?php
             if (isset($_SESSION["login"])) {
               echo '<li class="dropdown"><a href="#"><span>'. $name .'</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
-                      <li><a href="./process/process_logout.php">Logout</a></li>
+                      <li><a href="../process/process_logout.php">Logout</a></li>
                     </ul>
                   </li>';
             } else {
@@ -82,47 +90,58 @@ $result = mysqli_query($koneksi, $query);
     <main id="main">
         <!-- ======= Breadcrumbs ======= -->
         <section id="breadcrumbs" class="breadcrumbs">
-            <div class="container">
-                <ol>
-                    <li><a href="../index.php">Home</a></li>
-                    <li>Admin</li>
-                </ol>
-                <h2>Data Master</h2>
-            </div>
+          <div class="container">
+            <ol>
+              <li><a href="../index.php">Home</a></li>
+              <li>Admin</li>
+            </ol>
+            <h2>Data Master</h2>
+            <!-- <a href="../process/generate_pdf.php" target="_blank" class="btn btn-sm btn-primary">Cetak PDF</a> -->
+          </div>
         </section>
         <!-- End Breadcrumbs -->
 
-        <section class="inner-page">
-          <div class="container">
-              <table class="table table-striped table-hover">
-                <thead class="">
-                  <tr>
-                    <th scope="col">Nama</th>
-                    <th scope="col">Nomor</th>
-                    <th scope="col">Tanggal</th>
-                    <th scope="col">Jenis paket</th>
-                    <th scope="col">Jumlah penumpang</th>
-                    <th scope="col">Lama menginap</th>
-                    <th scope="col">Penginapan</th>
-                    <th scope="col">Konsumsi</th>
-                    <th scope="col">Transportasi</th>
-                    <th scope="col">Total</th>
-                    <th scope="col">Aksi</th>
-                  </tr>
-                </thead>
+          <div class="container hfull" data-aos="fade-up">
+            <form action="" method="GET" class="mb-3">
+              <div class="input-group mt-3">
+                <input type="text" class="form-control" placeholder="Cari pesanan..." name="search" />
+                <button class="btn btn-primary" type="submit">Cari</button>
+              </div>
+            </form>
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Nama</th>
+                  <th scope="col">Nomor identitas</th>
+                  <th scope="col">Gender</th>
+                  <th scope="col">Tanggal</th>
+                  <th scope="col">Jenis Kamar</th>
+                  <th scope="col">Jumlah Orang</th>
+                  <th scope="col">Lama menginap</th>
+                  <th scope="col">Konsumsi</th>
+                  <th scope="col">Transportasi</th>
+                  <th scope="col">Diskon</th>
+                  <th scope="col">Total</th>
+                  <th scope="col">Aksi</th>
+                </tr>
+              </thead>
               <?php
+              $search = isset($_GET['search']) ? $_GET['search'] : '';
+              $query = "SELECT * FROM pesanan WHERE nama LIKE '%$search%' OR nomor_identitas LIKE '%$search%'";
+              $result = mysqli_query($koneksi, $query);
               while ($data = mysqli_fetch_array($result)) {
                 echo "<tr>";
                 echo "<td>" . $data['nama'] . "</td>";
-                echo "<td>" . $data['nomor_telepon'] . "</td>";
+                echo "<td>" . $data['nomor_identitas'] . "</td>";
+                echo "<td>" . $data['gender'] . "</td>";
                 echo "<td>" . $data['tanggal'] . "</td>";
                 echo "<td>" . $data['jenis_paket'] . "</td>";
-                echo "<td>" . $data['jumlah_penumpang'] . " Orang</td>";
+                echo "<td>" . $data['jumlah_penginap'] . " Orang</td>";
                 echo "<td>" . $data['lama_menginap'] .  " Hari</td>";
-                echo "<td>" . ($data['penginapan'] == 1 ? 'tambah' : 'tidak') . "</td>";
-                echo "<td>" . ($data['konsumsi'] == 1 ? 'tambah' : 'tidak') . "</td>";
-                echo "<td>" . ($data['transportasi'] == 1 ? 'tambah' : 'tidak') . "</td>";
-                echo "<td>" . $data['total_biaya'] . "</td>";
+                echo "<td style='text-align: center;'>" . ($data['konsumsi'] == 1 ? '<i class="bi bi-check-circle"></i>' : '<i class="bi bi-x-circle"></i>') . "</td>";
+                echo "<td style='text-align: center;'>" . ($data['transportasi'] == 1 ? '<i class="bi bi-check-circle"></i>' : '<i class="bi bi-x-circle"></i>') . "</td>";
+                echo "<td>" . $data['diskon'] . "%</td>";
+                echo "<td>" . number_format($data['total_biaya'], 0, ',', '.') . "</td>";
                 echo "<td>
                 <div class='d-flex gap-3'>
                 <a href='edit.php?id=". $data['id'] ."'>
@@ -134,11 +153,10 @@ $result = mysqli_query($koneksi, $query);
                 </div>
                 </td>";
                 echo "</tr>";
-              }
+              } 
               ?>
-              </table>
+            </table>
           </div>
-        </section>
     </main>
     <!-- End #main -->
   

@@ -5,21 +5,31 @@ require_once "koneksi.php";
 if (isset($_POST['pesanan_submit'])) {
     $id_user = $_POST['id_user'];
     $nama = $_POST['name'];
-    $nomor = $_POST['phone'];
+    $gender = $_POST['gender'];
+    $nomor = $_POST['identity'];
     $tanggal = $_POST['date'];
     $jenis_paket = $_POST['package'];
-    $jumlah_penumpang = $_POST['passengers'];
+    $jumlah_penginap = $_POST['passengers'];
     $lama_menginap = $_POST['stay_length'];
-    $total = $_POST['total_cost'];
+    $diskon = $_POST['discount'];
+    
+    // Parse nilai total
+    $total = preg_replace('/[^0-9,]/', '', $_POST['total_cost']); // Hanya mengizinkan angka dan koma
+    $total = str_replace(',', '.', $total); // Mengganti koma menjadi titik decimal (untuk format numerik)
+    $total = (float) $total;
 
-    // Menginisialisasi nilai default untuk opsi tambahan yang bertipe data boolean
-    $penginapan = in_array('Penginapan', $_POST['options']) ? 1 : 0;
-    $transportasi = in_array('Transportasi', $_POST['options']) ? 1 : 0;
-    $konsumsi = in_array('Konsumsi', $_POST['options']) ? 1 : 0;
+    // jika user tidak memilih opsi
+    if (!isset($_POST['options'])) {
+        $transportasi = 0;
+        $konsumsi = 0;
+    } else {
+        // Menginisialisasi nilai default untuk opsi tambahan yang bertipe data boolean
+        $transportasi = in_array('Transportasi', $_POST['options']) ? 1 : 0;
+        $konsumsi = in_array('Konsumsi', $_POST['options']) ? 1 : 0;
+    }
 
-
-    $query = "INSERT INTO pesanan (nama, id_user, nomor_telepon, tanggal, jenis_paket, jumlah_penumpang, lama_menginap, penginapan, transportasi, konsumsi, total_biaya) 
-              VALUES ('$nama', '$id_user', '$nomor', '$tanggal', '$jenis_paket', '$jumlah_penumpang', '$lama_menginap', '$penginapan', '$transportasi', '$konsumsi', '$total')";
+    $query = "INSERT INTO pesanan (nama, gender, id_user, nomor_identitas, tanggal, jenis_paket, jumlah_penginap, lama_menginap, transportasi, konsumsi, diskon, total_biaya) 
+              VALUES ('$nama', '$gender', '$id_user', '$nomor', '$tanggal', '$jenis_paket', '$jumlah_penginap', '$lama_menginap', '$transportasi', '$konsumsi', '$diskon', '$total')";
               
     $result = mysqli_query($koneksi, $query);
 

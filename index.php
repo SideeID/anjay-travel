@@ -252,7 +252,7 @@ if (isset($_SESSION["login"])) {
           </ul>
 
           <div
-            class="row row-cols-md-4"
+            class="row row-cols-md-3"
             data-aos="fade-up"
             data-aos-delay="200"
           >
@@ -260,15 +260,19 @@ if (isset($_SESSION["login"])) {
             <div class="col">
               <div class="card h-100">
                 <img
-                  src="./assets/img/card-1.jpg"
+                  src="./assets/img/standar.jpeg"
                   class="card-img-top"
-                  alt="ubud"
+                  alt="standar room"
                 />
                 <div class="card-body">
-                  <h5 class="card-title">Ubud</h5>
+                  <h5 class="card-title">Standar</h5>
                   <p class="card-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Cupiditate molestiae voluptate sint assumenda eos
+                    <?php 
+                    $file = fopen("./assets/text/standarRoom.txt", "r");
+                    while(!feof($file)) {
+                      echo fgets($file);
+                    };
+                    ?>
                   </p>
                   <div class="card-button">
                     <a href="pemesanan.php" class="btn btn-primary"
@@ -281,15 +285,19 @@ if (isset($_SESSION["login"])) {
             <div class="col">
               <div class="card h-100">
                 <img
-                  src="./assets/img/card-5.jpg"
+                  src="./assets/img/delux.jpeg"
                   class="card-img-top"
-                  alt="Palm Springs Road"
+                  alt="delux room"
                 />
                 <div class="card-body">
-                  <h5 class="card-title">Uluwatu</h5>
+                  <h5 class="card-title">Delux</h5>
                   <p class="card-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Cupiditate molestiae voluptate sint assumenda eos
+                    <?php 
+                    $file = fopen("./assets/text/deluxRoom.txt", "r");
+                    while(!feof($file)) {
+                      echo fgets($file);
+                    };
+                    ?>
                   </p>
                   <div class="card-button">
                     <a href="pemesanan.php" class="btn btn-primary"
@@ -302,36 +310,19 @@ if (isset($_SESSION["login"])) {
             <div class="col">
               <div class="card h-100">
                 <img
-                  src="./assets/img/card-3.jpg"
+                  src="./assets/img/family.jpeg"
                   class="card-img-top"
-                  alt="Pura Agung Besakih"
+                  alt="family room"
                 />
                 <div class="card-body">
-                  <h5 class="card-title">Pura Agung Besakih</h5>
+                  <h5 class="card-title">Family</h5>
                   <p class="card-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Cupiditate molestiae voluptate sint assumenda eos
-                  </p>
-                  <div class="card-button">
-                    <a href="pemesanan.php" class="btn btn-primary"
-                      >Pesan Sekarang</a
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card h-100">
-                <img
-                  src="./assets/img/card-4.jpg"
-                  class="card-img-top"
-                  alt="Nusa Dua Bali"
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Nusa Dua Bali</h5>
-                  <p class="card-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Cupiditate molestiae voluptate sint assumenda eos
+                    <?php 
+                    $file = fopen("./assets/text/familyRoom.txt", "r");
+                    while(!feof($file)) {
+                      echo fgets($file);
+                    };
+                    ?>
                   </p>
                   <div class="card-button">
                     <a href="pemesanan.php" class="btn btn-primary"

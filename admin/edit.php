@@ -114,36 +114,44 @@ if (!$data) {
         <input type="text" class="form-control" id="name" name="name" value="<?php echo $data['nama']; ?>" required>
     </div>
               <div class="mb-3">
-                <label for="phone" class="form-label">Nomor</label>
-                <input type="number" class="form-control" id="phone" name="phone" value="<?php echo $data['nomor_telepon']; ?>" required>
+                <label for="identity" class="form-label">Nomor Identitas</label>
+                <input type="number" class="form-control" id="identity" name="identity" value="<?php echo $data['nomor_identitas']; ?>" required>
+              </div>
+              <div class="mb-3">
+                <label for="gender" class="form-label">Jenis Kelamin</label>
+                <select class="form-select" id="gender" name="gender" required>
+                    <option value="">Pilih jenis kelamin</option>
+                    <option value="Laki-laki">Laki-laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                </select>
               </div>
               <div class="mb-3">
                 <label for="date" class="form-label">Tanggal</label>
                 <input type="date" class="form-control" id="date" name="date" value="<?php echo $data['tanggal']; ?>" required>
               </div>
               <div class="mb-3">
-                <label for="package" class="form-label">Jenis Paket</label>
+                <label for="package" class="form-label">Jenis Kamar</label>
                 <input type="text" class="form-control" id="package" name="package" value="<?php echo $data['jenis_paket']; ?>" required>
               </div>
               <div class="mb-3">
-                <label for="passengers" class="form-label">Jumlah Penumpang</label>
-                <input type="number" class="form-control" id="passengers" name="passengers" value="<?php echo $data['jumlah_penumpang']; ?>" required>
+                <label for="passengers" class="form-label">Jumlah Penginap/Orang</label>
+                <input type="number" class="form-control" id="passengers" name="passengers" value="<?php echo $data['jumlah_penginap']; ?>" required>
               </div>
               <div class="mb-3">
-                <label for="stay_length" class="form-label">Lama Menginap</label>
+                <label for="stay_length" class="form-label">Lama Menginap/Hari</label>
                 <input type="number" class="form-control" id="stay_length" name="stay_length" value="<?php echo $data['lama_menginap']; ?>" required>
               </div>
               <div class="mb-3">
-                <label for="accommodation" class="form-label">Penginapan</label>
-                <input type="text" class="form-control" id="accommodation" name="accommodation" value="<?php echo $data['penginapan']; ?>" required>
-              </div>
-              <div class="mb-3">
-                <label for="consumption" class="form-label">Konsumsi</label>
+                <label for="consumption" class="form-label">Konsumsi [1 = iya, 0 = tidak]</label>
                 <input type="text" class="form-control" id="consumption" name="consumption" value="<?php echo $data['konsumsi']; ?>" required>
               </div>
               <div class="mb-3">
-                <label for="transportation" class="form-label">Transportasi</label>
+                <label for="transportation" class="form-label">Transportasi [1 = iya, 0 = tidak]</label>
                 <input type="text" class="form-control" id="transportation" name="transportation" value="<?php echo $data['transportasi']; ?>" required>
+              </div>
+              <div class="mb-3">
+                <label for="discount" class="form-label">Diskon</label>
+                <input type="number" class="form-control" id="discount" name="discount" value="<?php echo $data['diskon']; ?>" required>
               </div>
               <div class="mb-3">
                 <label for="total_cost" class="form-label">Total</label>
