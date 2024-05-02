@@ -14,8 +14,8 @@ if (isset($_POST['pesanan_submit'])) {
     $diskon = $_POST['discount'];
     
     // Parse nilai total
-    $total = preg_replace('/[^0-9,]/', '', $_POST['total_cost']); // Hanya mengizinkan angka dan koma
-    $total = str_replace(',', '.', $total); // Mengganti koma menjadi titik decimal (untuk format numerik)
+    $total = preg_replace('/[^0-9,]/', '', $_POST['total_cost']);
+    $total = str_replace(',', '.', $total);
     $total = (float) $total;
 
     // jika user tidak memilih opsi

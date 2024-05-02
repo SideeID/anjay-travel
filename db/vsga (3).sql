@@ -32,7 +32,7 @@ CREATE TABLE `pesanan` (
   `id_user` int DEFAULT NULL,
   `nama` varchar(100) DEFAULT NULL,
   `gender` varchar(10) NOT NULL,
-  `nomor_identitas` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `nomor_identitas` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tanggal` date DEFAULT NULL,
   `jenis_paket` varchar(50) DEFAULT NULL,
   `jumlah_penginap` smallint DEFAULT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE `pesanan` (
   `konsumsi` tinyint(1) DEFAULT '0',
   `diskon` int NOT NULL,
   `total_biaya` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `pesanan`
@@ -75,7 +75,7 @@ CREATE TABLE `users` (
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
