@@ -1,23 +1,28 @@
-# Hotel Ticket Booking Website
+# Hotel Ticket Booking Website (Submission VSGA)
 
-Ini adalah proyek website untuk melakukan pembelian tiket hotel dengan beberapa fitur penting, seperti login, registrasi, dan admin panel.
+Ini adalah proyek website untuk submission Vocational School Graduate Academy (VSGA) dalam rangka menjadi junior web developer. Proyek ini dirancang untuk melakukan pembelian tiket hotel dengan beberapa fitur penting, termasuk login, registrasi, admin panel, riwayat pesanan, dan pencarian tiket.
 
 ## Fitur Utama
 - **Registrasi Pengguna:** Pengguna dapat mendaftar untuk membuat akun baru.
 - **Login Pengguna:** Pengguna yang telah terdaftar dapat masuk ke akun mereka.
-- **Pembelian Tiket Hotel:** Pengguna dapat mencari, memilih, dan memesan tiket hotel.
+- **Pencarian Tiket:** Pengguna dapat mencari tiket hotel berdasarkan tanggal, lokasi, dan preferensi lainnya.
+- **Pembelian Tiket Hotel:** Setelah menemukan tiket yang sesuai, pengguna dapat langsung melakukan pemesanan.
+- **Riwayat Pesanan:** Pengguna dapat melihat riwayat semua pesanan yang telah dilakukan.
 - **Admin Panel:** Admin memiliki panel khusus untuk mengelola pesanan pengguna.
     - **Edit Pesanan:** Admin dapat mengedit detail pesanan pengguna.
     - **Batalkan Pesanan:** Admin dapat membatalkan pesanan yang tidak valid.
 
 ## Teknologi yang Digunakan
 - **Frontend:** HTML, CSS (Bootstrap 5.3), JavaScript
-- **Backend:** [Javascript], [MySQL]
+- **Backend:** [JavaScript], [MySQL]
 - **Animasi:** AOS (Animate On Scroll)
+
+## Catatan Penting untuk Pengujian
+Meskipun kode ini tersedia secara publik, sangat disarankan untuk tidak menggunakannya secara langsung dalam pengujian atau penilaian oleh assesor VSGA. Gunakan kode ini sebagai referensi untuk memahami pendekatan dan logika dalam pemrograman web, tetapi pastikan untuk menulis kode Anda sendiri yang menunjukkan kemampuan dan pemahaman Anda dalam subjek yang dinilai.
 
 ## Cara Menjalankan Proyek
 1. Klon proyek ini ke dalam sistem lokal Anda.
-2. Buka file `index.html` untuk mengakses website.
+2. Buka file `index.php` untuk mengakses website.
 3. Untuk mengakses admin panel, buka halaman admin dan masuk dengan kredensial admin.
 
 ## Cara Berkontribusi
