@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
       totalPackage *= 0.9;
       valueDiskon.value = 10; 
     } else {
-      // valueDiskon.value = ''; 
+      valueDiskon.value = ''; 
     }
 
     document.getElementById('total_paket').value = formatRupiah(totalPackage);
